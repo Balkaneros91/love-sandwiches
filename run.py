@@ -151,6 +151,21 @@ def calculate_stock_data(data):
     return new_stock_data
 
 
+def get_stock_values(data):
+    """
+    Get stock data values
+    """
+    print("Make the following numbers of sandwiches for next market:\n")
+
+    # Get the headings from the worksheet
+    headings = SHEET.worksheet("stock").row_values(1)
+    
+    # Create a dictionary using a dictionary comprehension
+    stock_values = {heading: data[i] for i, heading in enumerate(headings)}
+    
+    return stock_values
+
+
 def main():
     """
     Run all program functions
@@ -165,8 +180,12 @@ def main():
     stock_data = calculate_stock_data(sales_columns)
     update_worksheet(stock_data, "stock")
 
+    # Call the function and assign the result to the variable 'stock_values'
+    stock_values = get_stock_values(stock_data)
+
+    # Print the dictionary
+    print(stock_values)
+
 
 print("Welcome to Love Sandwiches Data Automation")
 main()
-
-
